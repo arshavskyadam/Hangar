@@ -180,7 +180,20 @@ def parse_update_date(page):
     return clean(m.group(1)) if m else ""
 
 
-def scrape(name_key, weeks=(0, 1), now=None):
+def last_periods(entries, grades):
+    """{date: {class: {"hour", "end"}}} — the last period with a lesson or a non-cancellation change."""
+    out = {}
+    for class_name, cell in entries:
+        if not class_name.startswith(tuple(grades)) or cell["hour"] is None:
+            continue
+        busy = cell["lessons"] or any(ch["type"] != CHANGE_TYPES["TableFreeChange"] for ch in cell["changes"])
+        cur = out.setdefault(cell["date"], {}).get(class_name)
+        if busy and (cur is None or cell["hour"] > cur["hour"]):
+            out[cell["date"]][class_name] = {"hour": cell["hour"], "end": cell["end"]}
+    return out
+
+
+def scrape(name_key, weeks=(0, 1), now=None, end_grades=()):
     """Scrape every class and return the teacher's lessons plus raw context."""
     now = now or datetime.now(ISRAEL_TZ)
     today = now.date()
@@ -307,8 +320,21 @@ def scrape(name_key, weeks=(0, 1), now=None):
             if l["date"] == entry["date"] and l["hour"] is not None and lo <= l["hour"] <= hi
             and set(l["classes"]) & set(entry["my_classes"])
         })
+    # When each class of the tracked grades finishes, today's timetable against the regular one.
+    current_end = last_periods([e for entries in slots.values() for e in entries], end_grades)
+    regular_end = last_periods(regular, end_grades)
+    class_end = {}
+    for day in sorted(set(current_end) | set(regular_end)):
+        names = sorted(set(current_end.get(day, {})) | set(regular_end.get(day, {})))
+        class_end[day] = [{
+            "class": n,
+            "now": current_end.get(day, {}).get(n),
+            "regular": regular_end.get(day, {}).get(n),
+        } for n in names]
+
     return {
         "scraped_at": now.isoformat(timespec="minutes"),
+        "class_end": class_end,
         "site_update": site_update,
         "class_count": len(classes),
         "days": sorted(days.values(), key=lambda d: d["date"]),

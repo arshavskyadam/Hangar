@@ -72,6 +72,16 @@ def diff(old, new, today):
     for c in new["class_changes"]:
         if (c["class"], c["date_label"], c["text"]) not in old_tab:
             found.append({"kind": "שינוי בדף השינויים", "date": "", "text": f"{c['class']}: {c['date_label']} {c['text']}".strip()})
+    if "class_end" in old:
+        for day, rows in new.get("class_end", {}).items():
+            if day < today or day not in shared:
+                continue
+            before = {r["class"]: r["now"] for r in old["class_end"].get(day, [])}
+            for r in rows:
+                was, now = before.get(r["class"]), r["now"]
+                if r["class"] in before and was != now:
+                    found.append({"kind": "שעת סיום", "date": day,
+                                  "text": f"{day} · {r['class']} מסיים {now['end'] if now else 'ללא לימודים'} (במקום {was['end'] if was else 'ללא לימודים'})"})
     if "agenda" in old:  # the first run with agenda support would otherwise report every item as new
         old_agenda = {(a["kind"], a["date"], a["title"]) for a in old["agenda"]}
         for a in new.get("agenda", []):
@@ -124,7 +134,7 @@ def main():
         latest = load_json(Path(args.offline), None)
         found = []
     else:
-        latest = scrape(CONFIG["name_key"])
+        latest = scrape(CONFIG["name_key"], end_grades=CONFIG.get("end_time_grades", []))
         if latest["class_count"] == 0 or not latest["days"]:
             sys.exit("scrape returned no classes or days; keeping the previous data")
         found = diff(previous, latest, today) if previous else []

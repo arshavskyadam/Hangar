@@ -56,6 +56,13 @@ header { display: grid; gap: 4px; }
 .ag .kind { font-size: .74rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
 .ag .kind.exam { background: var(--warn-soft); color: var(--warn); }
 .ag .hitline { color: var(--warn); font-weight: 600; font-size: .84rem; }
+.ends { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 14px; display: grid; gap: 6px; }
+.ends h3 { font-size: .9rem; font-weight: 600; }
+.ends table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+.ends td { padding: 4px 0; border-top: 1px solid var(--line); }
+.ends tr:first-child td { border-top: 0; }
+.ends td.t { font-family: var(--font-mono); font-weight: 600; text-align: end; white-space: nowrap; }
+.ends .diff { color: var(--warn); font-weight: 600; font-size: .8rem; }
 .daydate { font-size: .8rem; font-weight: 600; color: var(--muted); margin-top: 6px; }
 .alerts { background: var(--warn-soft); border-radius: var(--r); padding: 12px 14px; display: grid; gap: 6px; }
 .alerts h2 { color: var(--warn); font-size: .95rem; }
@@ -160,6 +167,7 @@ footer { font-size: .8rem; color: var(--muted); }
     <div id="dayholiday"></div>
     <div class="agenda" id="dayagenda"></div>
     <div class="lessons" id="daylist"></div>
+    <div id="dayends"></div>
   </section>
 
   <section id="view-week" hidden style="display:grid; grid-template-columns:minmax(0,1fr); gap:12px">
@@ -359,6 +367,11 @@ footer { font-size: .8rem; color: var(--muted); }
     document.getElementById("daytitle").textContent = d.weekday + " " + dm(d.date) + (d.date === todayISO ? " · היום" : "");
     document.getElementById("daycount").textContent = (on ? on + " שעות הוראה" : list.length ? "אין שיעורים בפועל" : "") + (gone ? " · " + gone + " לא מתקיימות" : "");
     document.getElementById("dayholiday").innerHTML = d.holidays.map(function (x) { return '<div class="holiday">' + esc(x) + (/חופש/.test(x) ? ' — לבדוק אם יש לימודים' : '') + '</div>'; }).join("");
+    var ends = (L.class_end || {})[selected] || [];
+    document.getElementById("dayends").innerHTML = ends.length ? '<div class="ends"><h3>שעת סיום · שכבה ט</h3><table>' + ends.map(function (r) {
+      var now = r.now, reg = r.regular, changed = reg && (!now || now.hour !== reg.hour);
+      return '<tr><td>' + esc(r["class"]) + (changed ? ' <span class="diff">' + (!now ? "אין לימודים" : now.hour < reg.hour ? "מסיימים מוקדם" : "מסיימים מאוחר") + ' · בדרך כלל ' + esc(reg.end) + '</span>' : "") + '</td><td class="t">' + (now ? esc(now.end) + ' <span class="muted" style="font-weight:400">(שעה ' + now.hour + ')</span>' : "—") + '</td></tr>';
+    }).join("") + '</table></div>' : "";
     // Items that land on a lesson are shown on its card; the rest give context for the day.
     var ctx = AG.filter(function (a) { return a.date === selected && !a.my_lessons.length; });
     document.getElementById("dayagenda").innerHTML = ctx.length ? '<div class="daydate">גם היום בכיתות שלך</div>' + ctx.map(function (a) { return agItem(a, false); }).join("") : "";
