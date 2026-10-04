@@ -26,6 +26,11 @@ def describe(l):
     return f"{l['date']} שעה {l['hour']} · {l['subject']} · {', '.join(l['classes'])}"
 
 
+def reasons(l):
+    texts = sorted({c["text"] for c in l["changes"]})
+    return f" — {', '.join(texts)}" if texts else ""
+
+
 def names(items):
     return [i["name"] if isinstance(i, dict) else i for i in items]
 
@@ -42,10 +47,15 @@ def diff(old, new, today):
     for k, l in new_by.items():
         if l["date"] not in shared:
             continue
+        status = l.get("status", "regular")
         if k not in old_by:
-            found.append({"kind": "נוסף", "date": l["date"], "text": describe(l)})
+            found.append({"kind": "לא מתקיים" if status == "cancelled" else "נוסף", "date": l["date"],
+                          "text": describe(l) + reasons(l)})
             continue
         before = old_by[k]
+        if before.get("status", "regular") != status:
+            found.append({"kind": "לא מתקיים" if status == "cancelled" else "חזר למערכת", "date": l["date"],
+                          "text": describe(l) + reasons(l)})
         for field, label in (("classes", "כיתות"), ("rooms", "חדר"), ("co_teachers", "מורים שותפים")):
             was, now = names(before.get(field, [])), names(l[field])
             if was != now:
@@ -62,6 +72,12 @@ def diff(old, new, today):
     for c in new["class_changes"]:
         if (c["class"], c["date_label"], c["text"]) not in old_tab:
             found.append({"kind": "שינוי בדף השינויים", "date": "", "text": f"{c['class']}: {c['date_label']} {c['text']}".strip()})
+    if "agenda" in old:  # the first run with agenda support would otherwise report every item as new
+        old_agenda = {(a["kind"], a["date"], a["title"]) for a in old["agenda"]}
+        for a in new.get("agenda", []):
+            if (a["kind"], a["date"], a["title"]) not in old_agenda:
+                found.append({"kind": f"{a['kind']} חדש", "date": a["date"],
+                              "text": f"{a['date']} · {a['title']} · {', '.join(a['my_classes'])}"})
     return found
 
 

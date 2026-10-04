@@ -157,6 +157,24 @@ def parse_changes_tab(page):
     return items
 
 
+def parse_agenda(page, kind):
+    """Items of the "מבחנים" / "אירועים" tabs: "06.10.2026, <b>title</b> משיעור 3 עד שיעור 4 לכיתות: ..."."""
+    items = []
+    for body in re.findall(r'<li class="ChangesInfo"[^>]*>(.*?)</li>', page, re.S):
+        text = clean(body).replace("\n", " ")
+        m = re.match(r"(\d{1,2})\.(\d{1,2})\.(\d{4})", text)
+        title = re.search(r"<b>(.*?)</b>", body, re.S)
+        span = re.search(r"משיעור\s*(\d+)\s*עד שיעור\s*(\d+)", text) or re.search(r"שיעור\s*(\d+)", text)
+        items.append({
+            "kind": kind,
+            "date": date(int(m.group(3)), int(m.group(2)), int(m.group(1))).isoformat() if m else "",
+            "title": clean(title.group(1)) if title else text,
+            "hours": [int(span.group(1)), int(span.group(span.lastindex))] if span else None,
+            "text": text,
+        })
+    return items
+
+
 def parse_update_date(page):
     m = re.search(r'class="UpdateDate">(.*?)</div>', page, re.S)
     return clean(m.group(1)) if m else ""
@@ -171,6 +189,7 @@ def scrape(name_key, weeks=(0, 1), now=None):
 
     days = {}
     slots = {}          # (date, hour) -> list of (class, cell)
+    regular = []        # (class, cell) from the plain timetable, before changes
     class_changes = []  # items from the "שינויים" tab of classes the teacher meets
     site_update = parse_update_date(home)
     tab_items = {}
@@ -185,6 +204,8 @@ def scrape(name_key, weeks=(0, 1), now=None):
                 days.setdefault(d["date"], d)
             for cell in grid["cells"]:
                 slots.setdefault((cell["date"], cell["hour"]), []).append((c["name"], cell))
+            plain = parse_grid(fetch(f"{BASE_URL}?cls={c['id']}&tab=timetable" + (f"&week={w}" if w else "")), today)
+            regular.extend((c["name"], cell) for cell in plain["cells"])
         tab_items[c["name"]] = parse_changes_tab(fetch(f"{BASE_URL}?cls={c['id']}&tab=changes"))
 
     def is_me(text):
@@ -202,7 +223,7 @@ def scrape(name_key, weeks=(0, 1), now=None):
                 key = (day, hour, l["subject"])
                 entry = lessons.setdefault(key, {
                     "date": day, "hour": hour, "start": cell["start"], "end": cell["end"],
-                    "subject": l["subject"], "classes": [], "rooms": [], "co_teachers": [],
+                    "subject": l["subject"], "status": "regular", "classes": [], "rooms": [], "co_teachers": [],
                     "other_lessons": [], "changes": [],
                 })
                 if class_name not in entry["classes"]:
@@ -225,16 +246,67 @@ def scrape(name_key, weeks=(0, 1), now=None):
                     if item not in entry["changes"]:
                         entry["changes"].append(item)
 
+    # Regular lessons that the current timetable dropped (trip, ceremony, cancellation).
+    for class_name, cell in regular:
+        for l in cell["lessons"]:
+            if not is_me(l["teacher"]):
+                continue
+            key = (cell["date"], cell["hour"], l["subject"])
+            if key in lessons and lessons[key]["status"] == "regular":
+                continue
+            current = [cur for name, cur in slots.get((cell["date"], cell["hour"]), []) if name == class_name]
+            entry = lessons.setdefault(key, {
+                "date": cell["date"], "hour": cell["hour"], "start": cell["start"], "end": cell["end"],
+                "subject": l["subject"], "status": "cancelled", "classes": [], "rooms": [],
+                "co_teachers": [], "other_lessons": [], "changes": [],
+            })
+            if class_name not in entry["classes"]:
+                entry["classes"].append(class_name)
+            if l["room"] and l["room"] not in entry["rooms"]:
+                entry["rooms"].append(l["room"])
+            for other in cell["lessons"]:
+                co = {"name": other["teacher"], "room": other["room"]}
+                if other["subject"] == l["subject"] and not is_me(other["teacher"]) and co not in entry["co_teachers"]:
+                    entry["co_teachers"].append(co)
+            for cur in current:
+                for ch in cur["changes"]:
+                    item = {"class": class_name, **ch, "mentions_me": is_me(ch["text"])}
+                    if item not in entry["changes"]:
+                        entry["changes"].append(item)
+
     my_classes = sorted({c for l in lessons.values() for c in l["classes"]})
+    # Keep only the "שינויים" items that name the teacher or fall on one of the teacher's lessons in that class.
+    my_slots = {(l["date"], l["hour"], c) for l in lessons.values() for c in l["classes"]}
     for class_name, items in tab_items.items():
         for it in items:
-            if class_name in my_classes or is_me(it["text"]):
+            m = re.search(r"(\d{1,2})\.(\d{1,2})\.(\d{4}),\s*שיעור\s*(\d+)", it["text"])
+            slot = (date(int(m.group(3)), int(m.group(2)), int(m.group(1))).isoformat(), int(m.group(4)), class_name) if m else None
+            if is_me(it["text"]) or slot in my_slots:
                 class_changes.append({"class": class_name, **it, "mentions_me": is_me(it["text"])})
 
     ordered = sorted(lessons.values(), key=lambda l: (l["date"], l["hour"] if l["hour"] is not None else 99, l["subject"]))
     for l in ordered:
         l["classes"].sort()
         l["co_teachers"].sort(key=lambda c: c["name"])
+
+    # Exams and events of the classes the teacher meets, merged across classes.
+    ids = {c["name"]: c["id"] for c in classes}
+    agenda = {}
+    for class_name in my_classes:
+        for tab, kind in (("exams", "מבחן"), ("events", "אירוע")):
+            for it in parse_agenda(fetch(f"{BASE_URL}?cls={ids[class_name]}&tab={tab}"), kind):
+                if it["date"] and it["date"] < today.isoformat():
+                    continue
+                entry = agenda.setdefault((it["kind"], it["date"], it["title"], tuple(it["hours"] or ())), {**it, "my_classes": [], "my_lessons": []})
+                if class_name not in entry["my_classes"]:
+                    entry["my_classes"].append(class_name)
+    for entry in agenda.values():
+        lo, hi = entry["hours"] or (0, 99)
+        entry["my_lessons"] = sorted({
+            l["hour"] for l in ordered
+            if l["date"] == entry["date"] and l["hour"] is not None and lo <= l["hour"] <= hi
+            and set(l["classes"]) & set(entry["my_classes"])
+        })
     return {
         "scraped_at": now.isoformat(timespec="minutes"),
         "site_update": site_update,
@@ -242,4 +314,5 @@ def scrape(name_key, weeks=(0, 1), now=None):
         "days": sorted(days.values(), key=lambda d: d["date"]),
         "lessons": ordered,
         "class_changes": class_changes,
+        "agenda": sorted(agenda.values(), key=lambda a: (a["date"], a["kind"], a["title"])),
     }
