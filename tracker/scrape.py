@@ -193,33 +193,44 @@ def last_periods(entries, grades):
     return out
 
 
-def scrape(name_key, weeks=(0, 1), now=None, end_grades=()):
-    """Scrape every class and return the teacher's lessons plus raw context."""
+def collect(weeks=(0, 1), now=None):
+    """Fetch every class's grids and changes once; the result is shared by all tracked teachers."""
     now = now or datetime.now(ISRAEL_TZ)
     today = now.date()
     home = fetch(BASE_URL)
-    classes = parse_classes(home)
-
-    days = {}
-    slots = {}          # (date, hour) -> list of (class, cell)
-    regular = []        # (class, cell) from the plain timetable, before changes
-    class_changes = []  # items from the "שינויים" tab of classes the teacher meets
-    site_update = parse_update_date(home)
-    tab_items = {}
-
-    for c in classes:
+    raw = {"now": now, "classes": parse_classes(home), "days": {}, "slots": {}, "regular": [],
+           "tab_items": {}, "site_update": parse_update_date(home)}
+    for c in raw["classes"]:
         for w in weeks:
-            url = f"{BASE_URL}?cls={c['id']}&tab=changestable" + (f"&week={w}" if w else "")
-            page = fetch(url)
-            site_update = parse_update_date(page) or site_update
+            page = fetch(f"{BASE_URL}?cls={c['id']}&tab=changestable" + (f"&week={w}" if w else ""))
+            raw["site_update"] = parse_update_date(page) or raw["site_update"]
             grid = parse_grid(page, today)
             for d in grid["days"]:
-                days.setdefault(d["date"], d)
+                raw["days"].setdefault(d["date"], d)
             for cell in grid["cells"]:
-                slots.setdefault((cell["date"], cell["hour"]), []).append((c["name"], cell))
+                raw["slots"].setdefault((cell["date"], cell["hour"]), []).append((c["name"], cell))
             plain = parse_grid(fetch(f"{BASE_URL}?cls={c['id']}&tab=timetable" + (f"&week={w}" if w else "")), today)
-            regular.extend((c["name"], cell) for cell in plain["cells"])
-        tab_items[c["name"]] = parse_changes_tab(fetch(f"{BASE_URL}?cls={c['id']}&tab=changes"))
+            raw["regular"].extend((c["name"], cell) for cell in plain["cells"])
+        raw["tab_items"][c["name"]] = parse_changes_tab(fetch(f"{BASE_URL}?cls={c['id']}&tab=changes"))
+    return raw
+
+
+_agenda_cache = {}
+
+
+def fetch_agenda(class_id, tab, kind):
+    if (class_id, tab) not in _agenda_cache:
+        _agenda_cache[(class_id, tab)] = parse_agenda(fetch(f"{BASE_URL}?cls={class_id}&tab={tab}"), kind)
+    return _agenda_cache[(class_id, tab)]
+
+
+def scrape(name_key, raw=None, end_grades=()):
+    """Return one teacher's lessons plus context, from a collect() result."""
+    raw = raw or collect()
+    now, classes, days, slots, regular, tab_items, site_update = (
+        raw["now"], raw["classes"], raw["days"], raw["slots"], raw["regular"], raw["tab_items"], raw["site_update"])
+    today = now.date()
+    class_changes = []  # items from the "שינויים" tab of classes the teacher meets
 
     def is_me(text):
         return name_key in text
@@ -307,7 +318,7 @@ def scrape(name_key, weeks=(0, 1), now=None, end_grades=()):
     agenda = {}
     for class_name in my_classes:
         for tab, kind in (("exams", "מבחן"), ("events", "אירוע")):
-            for it in parse_agenda(fetch(f"{BASE_URL}?cls={ids[class_name]}&tab={tab}"), kind):
+            for it in fetch_agenda(ids[class_name], tab, kind):
                 if it["date"] and it["date"] < today.isoformat():
                     continue
                 entry = agenda.setdefault((it["kind"], it["date"], it["title"], tuple(it["hours"] or ())), {**it, "my_classes": [], "my_lessons": []})

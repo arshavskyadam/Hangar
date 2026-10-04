@@ -1,4 +1,4 @@
-<title>המערכת של אדם</title>
+<title>__TITLE__</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
@@ -146,7 +146,7 @@ footer { font-size: .8rem; color: var(--muted); }
 <div class="wrap" dir="rtl" lang="he">
   <header>
     <span class="eyebrow">מערכת שעות אישית · טכני חיפה</span>
-    <h1 id="who">ארשבסקי אדם</h1>
+    <h1 id="who"></h1>
     <div class="meta" id="meta"></div>
   </header>
 
@@ -181,7 +181,7 @@ footer { font-size: .8rem; color: var(--muted); }
   </section>
 
   <section id="view-agenda" hidden style="display:grid; grid-template-columns:minmax(0,1fr); gap:10px">
-    <p class="muted" style="margin:0">מבחנים ואירועים קרובים בכיתות שאתה מלמד בהן. מסומן בכתום מה שנופל על שיעור שלך.</p>
+    <p class="muted" style="margin:0">מבחנים ואירועים קרובים בכיתות שלך. מסומן בכתום מה שנופל על שיעור שלך.</p>
     <div class="agenda" id="agenda"></div>
   </section>
 
@@ -368,7 +368,7 @@ footer { font-size: .8rem; color: var(--muted); }
     document.getElementById("daycount").textContent = (on ? on + " שעות הוראה" : list.length ? "אין שיעורים בפועל" : "") + (gone ? " · " + gone + " לא מתקיימות" : "");
     document.getElementById("dayholiday").innerHTML = d.holidays.map(function (x) { return '<div class="holiday">' + esc(x) + (/חופש/.test(x) ? ' — לבדוק אם יש לימודים' : '') + '</div>'; }).join("");
     var ends = (L.class_end || {})[selected] || [];
-    document.getElementById("dayends").innerHTML = ends.length ? '<div class="ends"><h3>שעת סיום · שכבה ט</h3><table>' + ends.map(function (r) {
+    document.getElementById("dayends").innerHTML = ends.length ? '<div class="ends"><h3>שעת סיום · שכבה ' + esc((DATA.end_grades || []).join(", ").replace(/'/g, "")) + '</h3><table>' + ends.map(function (r) {
       var now = r.now, reg = r.regular, changed = reg && (!now || now.hour !== reg.hour);
       return '<tr><td>' + esc(r["class"]) + (changed ? ' <span class="diff">' + (!now ? "אין לימודים" : now.hour < reg.hour ? "מסיימים מוקדם" : "מסיימים מאוחר") + ' · בדרך כלל ' + esc(reg.end) + '</span>' : "") + '</td><td class="t">' + (now ? esc(now.end) + ' <span class="muted" style="font-weight:400">(שעה ' + now.hour + ')</span>' : "—") + '</td></tr>';
     }).join("") + '</table></div>' : "";

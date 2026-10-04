@@ -1,6 +1,6 @@
 """Daily run: scrape, compare with the previous run, save history and build the page.
 
-Usage: python3 tracker/run.py [--offline data/latest.json]
+Usage: python3 tracker/run.py [--offline]
 """
 
 import argparse
@@ -10,10 +10,9 @@ from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from scrape import ISRAEL_TZ, scrape  # noqa: E402
+from scrape import ISRAEL_TZ, collect, scrape  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-DATA = ROOT / "data"
 CONFIG = json.loads((ROOT / "tracker" / "config.json").read_text(encoding="utf-8"))
 MAX_CHANGELOG = 300
 
@@ -103,46 +102,40 @@ def write_json(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
 
 
-def build_page(latest, changelog, history):
+def build_page(person, latest, changelog, history):
     template = (ROOT / "tracker" / "template.html").read_text(encoding="utf-8")
     payload = {
-        "teacher": CONFIG["display_name"],
+        "teacher": person["display_name"],
         "source": CONFIG["site"],
+        "end_grades": person.get("end_time_grades", []),
         "latest": latest,
         "changelog": changelog,
         "history": history,
     }
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
-    out = ROOT / "site" / "index.html"
-    out.parent.mkdir(exist_ok=True)
-    out.write_text(template.replace("/*__DATA__*/null", blob), encoding="utf-8")
+    out = ROOT / person["page"]
+    out.parent.mkdir(parents=True, exist_ok=True)
+    page = template.replace("/*__DATA__*/null", blob).replace("__TITLE__", person["title"])
+    out.write_text(page, encoding="utf-8")
     return out
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--offline", help="skip scraping and rebuild the page from this snapshot")
-    args = ap.parse_args()
+def run_person(person, raw, today, offline):
+    data = ROOT / person["data_dir"]
+    previous = load_json(data / "latest.json", {})
+    changelog = load_json(data / "changelog.json", [])
+    history = load_json(data / "history.json", {})
 
-    now = datetime.now(ISRAEL_TZ)
-    today = now.date().isoformat()
-    previous = load_json(DATA / "latest.json", {})
-    changelog = load_json(DATA / "changelog.json", [])
-    history = load_json(DATA / "history.json", {})
-
-    if args.offline:
-        latest = load_json(Path(args.offline), None)
-        found = []
+    if offline:
+        latest, found = previous, []
     else:
-        latest = scrape(CONFIG["name_key"], end_grades=CONFIG.get("end_time_grades", []))
-        if latest["class_count"] == 0 or not latest["days"]:
-            sys.exit("scrape returned no classes or days; keeping the previous data")
+        latest = scrape(person["name_key"], raw=raw, end_grades=person.get("end_time_grades", []))
         found = diff(previous, latest, today) if previous else []
         for f in found:
             f["detected_at"] = latest["scraped_at"]
         changelog = (found + changelog)[:MAX_CHANGELOG]
-        write_json(DATA / "latest.json", latest)
-        write_json(DATA / "changelog.json", changelog)
+        write_json(data / "latest.json", latest)
+        write_json(data / "changelog.json", changelog)
         # One entry per school day: the most recent view of that day wins, so past days stay on record.
         for d in latest["days"]:
             history[d["date"]] = {
@@ -150,14 +143,30 @@ def main():
                 "recorded_at": latest["scraped_at"],
                 "lessons": [l for l in latest["lessons"] if l["date"] == d["date"]],
             }
-        write_json(DATA / "history.json", history)
-    out = build_page(latest, changelog, [history[k] for k in sorted(history)])
+        write_json(data / "history.json", history)
+    out = build_page(person, latest, changelog, [history[k] for k in sorted(history)])
 
+    print(f"=== {person['display_name']} ===")
     print(f"lessons found: {len(latest['lessons'])} across {len(latest['days'])} days")
     print(f"changes since last run: {len(found)}")
     for f in found:
         print(f"  [{f['kind']}] {f['text']}")
     print(f"page: {out.relative_to(ROOT)}")
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--offline", action="store_true", help="skip scraping and rebuild the pages from saved data")
+    args = ap.parse_args()
+
+    now = datetime.now(ISRAEL_TZ)
+    raw = None
+    if not args.offline:
+        raw = collect(now=now)
+        if not raw["classes"] or not raw["days"]:
+            sys.exit("scrape returned no classes or days; keeping the previous data")
+    for person in CONFIG["people"]:
+        run_person(person, raw, now.date().isoformat(), args.offline)
 
 
 if __name__ == "__main__":
