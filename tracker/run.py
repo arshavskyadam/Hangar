@@ -14,7 +14,6 @@ from scrape import ISRAEL_TZ, scrape  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-DAYS = DATA / "days"
 CONFIG = json.loads((ROOT / "tracker" / "config.json").read_text(encoding="utf-8"))
 MAX_CHANGELOG = 300
 
@@ -103,6 +102,7 @@ def main():
     today = now.date().isoformat()
     previous = load_json(DATA / "latest.json", {})
     changelog = load_json(DATA / "changelog.json", [])
+    history = load_json(DATA / "history.json", {})
 
     if args.offline:
         latest = load_json(Path(args.offline), None)
@@ -117,16 +117,15 @@ def main():
         changelog = (found + changelog)[:MAX_CHANGELOG]
         write_json(DATA / "latest.json", latest)
         write_json(DATA / "changelog.json", changelog)
-        # One file per school day: the most recent view of that day wins, so past days stay on record.
+        # One entry per school day: the most recent view of that day wins, so past days stay on record.
         for d in latest["days"]:
-            write_json(DAYS / f"{d['date']}.json", {
+            history[d["date"]] = {
                 **d,
                 "recorded_at": latest["scraped_at"],
                 "lessons": [l for l in latest["lessons"] if l["date"] == d["date"]],
-            })
-
-    history = [load_json(p, {}) for p in sorted(DAYS.glob("*.json"))]
-    out = build_page(latest, changelog, history)
+            }
+        write_json(DATA / "history.json", history)
+    out = build_page(latest, changelog, [history[k] for k in sorted(history)])
 
     print(f"lessons found: {len(latest['lessons'])} across {len(latest['days'])} days")
     print(f"changes since last run: {len(found)}")
