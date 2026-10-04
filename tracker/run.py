@@ -6,6 +6,9 @@ Usage: python3 tracker/run.py [--offline]
 import argparse
 import json
 import sys
+import time
+import urllib.error
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 
@@ -15,6 +18,24 @@ from scrape import ISRAEL_TZ, collect, scrape  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG = json.loads((ROOT / "tracker" / "config.json").read_text(encoding="utf-8"))
 MAX_CHANGELOG = 300
+# Kept out of git (the repo is public): anyone who knows an ntfy topic can read it.
+SECRETS = json.loads((ROOT / "tracker" / "secrets.json").read_text(encoding="utf-8")) \
+    if (ROOT / "tracker" / "secrets.json").exists() else {}
+
+
+def notify_ntfy(topic, title, message, click):
+    """Send a phone notification through ntfy.sh. The free tier is rate limited per IP, so retry."""
+    body = json.dumps({"topic": topic, "title": title, "message": message, "click": click, "tags": ["school"]})
+    for attempt in range(6):
+        try:
+            req = urllib.request.Request("https://ntfy.sh/", data=body.encode("utf-8"), method="POST",
+                                         headers={"Content-Type": "application/json"})
+            with urllib.request.urlopen(req, timeout=20):
+                return True
+        except (urllib.error.URLError, TimeoutError) as e:
+            print(f"ntfy attempt {attempt + 1} failed: {e}")
+            time.sleep(15 * (attempt + 1))
+    return False
 
 
 def lesson_key(l):
@@ -147,6 +168,14 @@ def run_person(person, raw, today, offline):
             }
         write_json(data / "history.json", history)
     out = build_page(person, latest, changelog, [history[k] for k in sorted(history)])
+
+    topic = SECRETS.get("ntfy_topics", {}).get(person["display_name"])
+    if topic and found:
+        lines = [f"• {f['kind']}: {f['text']}" for f in found[:12]]
+        if len(found) > 12:
+            lines.append(f"ועוד {len(found) - 12} שינויים בדף")
+        sent = notify_ntfy(topic, "⚠️ שינוי במערכת", "\n".join(lines), person.get("artifact_url", ""))
+        print(f"ntfy notification to {person['display_name']}: {'sent' if sent else 'FAILED'}")
 
     print(f"=== {person['display_name']} ===")
     print(f"lessons found: {len(latest['lessons'])} across {len(latest['days'])} days")
