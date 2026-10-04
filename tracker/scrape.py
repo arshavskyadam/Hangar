@@ -224,7 +224,7 @@ def fetch_agenda(class_id, tab, kind):
     return _agenda_cache[(class_id, tab)]
 
 
-def scrape(name_key, raw=None, end_grades=()):
+def scrape(name_key, raw=None, end_grades=(), extra_lessons=()):
     """Return one teacher's lessons plus context, from a collect() result."""
     raw = raw or collect()
     now, classes, days, slots, regular, tab_items, site_update = (
@@ -297,6 +297,24 @@ def scrape(name_key, raw=None, end_grades=()):
                     item = {"class": class_name, **ch, "mentions_me": is_me(ch["text"])}
                     if item not in entry["changes"]:
                         entry["changes"].append(item)
+
+    # Recurring lessons the user added by hand because the school site doesn't list them.
+    times = {}
+    for (_, hour), entries in slots.items():
+        for _, cell in entries:
+            times.setdefault(hour, (cell["start"], cell["end"]))
+    for extra in extra_lessons:
+        for d in days.values():
+            if date.fromisoformat(d["date"]).isoweekday() % 7 != extra["weekday"]:
+                continue
+            for hour in extra["hours"]:
+                start, end = times.get(hour, ("", ""))
+                lessons.setdefault((d["date"], hour, extra["subject"]), {
+                    "date": d["date"], "hour": hour, "start": start, "end": end,
+                    "subject": extra["subject"], "status": "regular", "manual": True,
+                    "classes": list(extra.get("classes", [])), "rooms": list(extra.get("rooms", [])),
+                    "co_teachers": [], "other_lessons": [], "changes": [],
+                })
 
     my_classes = sorted({c for l in lessons.values() for c in l["classes"]})
     # Keep only the "שינויים" items that name the teacher or fall on one of the teacher's lessons in that class.

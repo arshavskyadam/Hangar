@@ -19,7 +19,18 @@
    "data_dir": "data/rina",
    "page": "site/rina/index.html",
    "artifact_url": "https://claude.ai/artifact/Rfp9BVeDpX439KVN6xo2oN",
-   "end_time_grades": []
+   "end_time_grades": [],
+   "extra_lessons": [
+    {
+     "weekday": 1,
+     "hours": [
+      6,
+      7
+     ],
+     "subject": "תגבור חשמל",
+     "note": "weekday: 0=ראשון, 1=שני ... 4=חמישי"
+    }
+   ]
   }
  ]
 }

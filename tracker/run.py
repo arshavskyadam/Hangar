@@ -36,8 +36,9 @@ def names(items):
 
 def diff(old, new, today):
     """List what changed in upcoming lessons between two runs."""
-    old_by = {lesson_key(l): l for l in old.get("lessons", []) if l["date"] >= today}
-    new_by = {lesson_key(l): l for l in new["lessons"] if l["date"] >= today}
+    # Lessons added by hand in the config aren't on the site, so they are never reported as changes.
+    old_by = {lesson_key(l): l for l in old.get("lessons", []) if l["date"] >= today and not l.get("manual")}
+    new_by = {lesson_key(l): l for l in new["lessons"] if l["date"] >= today and not l.get("manual")}
     # Only compare dates both runs could see, so the week rolling forward isn't reported as "new lessons".
     old_dates = {d["date"] for d in old.get("days", [])}
     new_dates = {d["date"] for d in new["days"]}
@@ -129,7 +130,8 @@ def run_person(person, raw, today, offline):
     if offline:
         latest, found = previous, []
     else:
-        latest = scrape(person["name_key"], raw=raw, end_grades=person.get("end_time_grades", []))
+        latest = scrape(person["name_key"], raw=raw, end_grades=person.get("end_time_grades", []),
+                        extra_lessons=person.get("extra_lessons", []))
         found = diff(previous, latest, today) if previous else []
         for f in found:
             f["detected_at"] = latest["scraped_at"]

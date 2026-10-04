@@ -274,10 +274,11 @@ footer { font-size: .8rem; color: var(--muted); }
     b.changes.forEach(function (c) {
       h += '<div class="change' + (off || BAD.test(c.type + c.text) ? " bad" : "") + '"><b>' + esc(c.type) + '</b><span>' + esc(c.text) + '</span></div>';
     });
-    h += '<div class="row"><span class="label">כיתה</span>' + b.classes.map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join("") + '</div>';
+    if (b.manual) h += '<div class="row"><span class="chip plain">נוסף ידנית · לא מופיע באתר בית הספר</span></div>';
+    if (b.classes.length) h += '<div class="row"><span class="label">כיתה</span>' + b.classes.map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join("") + '</div>';
     if (b.rooms.length) h += '<div class="row"><span class="label">חדר</span>' + b.rooms.map(function (r) { return '<span class="chip plain">' + esc(r) + '</span>'; }).join("") + '</div>';
     if (b.co_teachers.length) h += '<div class="row"><span class="label">מלמדים איתך</span>' + b.co_teachers.map(function (c) { return '<span class="chip plain">' + esc(c.name) + (c.room ? ' <span class="rm">· ' + esc(c.room) + '</span>' : "") + '</span>'; }).join("") + '</div>';
-    else h += '<div class="row"><span class="label">מלמדים איתך</span><span class="muted">לבד</span></div>';
+    else if (!b.manual) h += '<div class="row"><span class="label">מלמדים איתך</span><span class="muted">לבד</span></div>';
     if (b.other_lessons.length) h += '<details><summary>במקביל בכיתה (' + b.other_lessons.length + ')</summary><ul>' + b.other_lessons.map(function (o) { return '<li>' + esc(o.subject) + (o.room ? " (" + esc(o.room) + ")" : "") + " — " + esc(o.teacher) + '</li>'; }).join("") + '</ul></details>';
     return h + '</div></article>';
   }

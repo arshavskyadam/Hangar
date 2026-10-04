@@ -1,5 +1,5 @@
 {
- "scraped_at": "2026-10-04T21:14+03:00",
+ "scraped_at": "2026-10-04T21:30+03:00",
  "class_end": {},
  "site_update": "מעודכן ל: 04.10.2026, שעה: 15:37",
  "class_count": 30,
@@ -217,6 +217,34 @@
      "room": ""
     }
    ],
+   "other_lessons": [],
+   "changes": []
+  },
+  {
+   "date": "2026-10-05",
+   "hour": 6,
+   "start": "12:15",
+   "end": "13:00",
+   "subject": "תגבור חשמל",
+   "status": "regular",
+   "manual": true,
+   "classes": [],
+   "rooms": [],
+   "co_teachers": [],
+   "other_lessons": [],
+   "changes": []
+  },
+  {
+   "date": "2026-10-05",
+   "hour": 7,
+   "start": "13:40",
+   "end": "14:25",
+   "subject": "תגבור חשמל",
+   "status": "regular",
+   "manual": true,
+   "classes": [],
+   "rooms": [],
+   "co_teachers": [],
    "other_lessons": [],
    "changes": []
   },
@@ -682,6 +710,34 @@
      "room": ""
     }
    ],
+   "other_lessons": [],
+   "changes": []
+  },
+  {
+   "date": "2026-10-12",
+   "hour": 6,
+   "start": "12:15",
+   "end": "13:00",
+   "subject": "תגבור חשמל",
+   "status": "regular",
+   "manual": true,
+   "classes": [],
+   "rooms": [],
+   "co_teachers": [],
+   "other_lessons": [],
+   "changes": []
+  },
+  {
+   "date": "2026-10-12",
+   "hour": 7,
+   "start": "13:40",
+   "end": "14:25",
+   "subject": "תגבור חשמל",
+   "status": "regular",
+   "manual": true,
+   "classes": [],
+   "rooms": [],
+   "co_teachers": [],
    "other_lessons": [],
    "changes": []
   },
