@@ -2,7 +2,7 @@
  "site": "https://techni.shahaf.site/",
  "people": [
   {
-   "name_key": "ארשבסקי",
+   "name_key": "ארשבסקי אדם",
    "display_name": "ארשבסקי אדם",
    "title": "המערכת של אדם",
    "data_dir": "data",
@@ -13,7 +13,7 @@
    ]
   },
   {
-   "name_key": "ירובוי",
+   "name_key": "ירובוי רינה",
    "display_name": "ירובוי רינה",
    "title": "המערכת של רינה",
    "data_dir": "data/rina",
