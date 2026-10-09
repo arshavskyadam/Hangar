@@ -1,0 +1,1681 @@
+{
+ "2026-10-04": {
+  "date": "2026-10-04",
+  "weekday": "יום ראשון",
+  "holidays": [
+   "חופש סוכות חט\"ע"
+  ],
+  "recorded_at": "2026-10-08T13:06+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-04",
+    "hour": 1,
+    "start": "08:10",
+    "end": "08:55",
+    "subject": "מעבדת תכנות בקרים ומיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-04",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא'- 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-04",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא'- 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-05": {
+  "date": "2026-10-05",
+  "weekday": "יום שני",
+  "holidays": [
+   "יום הזיכרון הלאומי לאירועי 7 באוקטובר"
+  ],
+  "recorded_at": "2026-10-08T13:06+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-05",
+    "hour": 5,
+    "start": "11:30",
+    "end": "12:15",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-05",
+    "hour": 6,
+    "start": "12:15",
+    "end": "13:00",
+    "subject": "תגבור חשמל",
+    "status": "regular",
+    "manual": true,
+    "classes": [],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-05",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "תגבור חשמל",
+    "status": "regular",
+    "manual": true,
+    "classes": [],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-06": {
+  "date": "2026-10-06",
+  "weekday": "יום שלישי",
+  "holidays": [],
+  "recorded_at": "2026-10-08T13:06+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-06",
+    "hour": 1,
+    "start": "08:10",
+    "end": "08:55",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "cancelled",
+    "classes": [
+     "יא- 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "יא- 6",
+      "type": "אירוע",
+      "text": "מירוץ שכבה י\"א",
+      "mentions_me": false
+     }
+    ]
+   },
+   {
+    "date": "2026-10-06",
+    "hour": 2,
+    "start": "08:55",
+    "end": "09:40",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "cancelled",
+    "classes": [
+     "יא- 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "יא- 6",
+      "type": "אירוע",
+      "text": "מירוץ שכבה י\"א",
+      "mentions_me": false
+     }
+    ]
+   },
+   {
+    "date": "2026-10-06",
+    "hour": 5,
+    "start": "11:30",
+    "end": "12:15",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "פלדשטיין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-06",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-07": {
+  "date": "2026-10-07",
+  "weekday": "יום רביעי",
+  "holidays": [],
+  "recorded_at": "2026-10-08T13:06+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-07",
+    "hour": 4,
+    "start": "10:40",
+    "end": "11:25",
+    "subject": "מעבדת תכנות בקרים ומיקרו בקרים",
+    "status": "cancelled",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "י' - 5",
+      "type": "אירוע",
+      "text": "טקס 7.10- שכבת ט+י+יג",
+      "mentions_me": false
+     }
+    ]
+   },
+   {
+    "date": "2026-10-07",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "ירובוי רינה <- גניים תימור",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [
+     {
+      "class": "י' - 5",
+      "subject": "מעבדה יישומים במערכות חשמל",
+      "room": "",
+      "teacher": "קריין נועה"
+     },
+     {
+      "class": "י' - 5",
+      "subject": "מעבדה יישומים במערכות חשמל",
+      "room": "",
+      "teacher": "לאונרד אלמוג"
+     },
+     {
+      "class": "י' - 5",
+      "subject": "מעבדה יישומים במערכות חשמל",
+      "room": "",
+      "teacher": "גניים תימור"
+     }
+    ],
+    "changes": [
+     {
+      "class": "י' - 5",
+      "type": "מילוי מקום",
+      "text": "אגרסט ניקולא <- קריין נועה",
+      "mentions_me": false
+     },
+     {
+      "class": "י' - 5",
+      "type": "מילוי מקום",
+      "text": "ירובוי לאה <- לאונרד אלמוג 23 מע' חשמל",
+      "mentions_me": false
+     },
+     {
+      "class": "י' - 5",
+      "type": "מילוי מקום",
+      "text": "ירובוי רינה <- גניים תימור",
+      "mentions_me": true
+     }
+    ]
+   },
+   {
+    "date": "2026-10-07",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "cancelled",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "י' - 5",
+      "type": "מילוי מקום",
+      "text": "אגרסט ניקולא <- קריין נועה",
+      "mentions_me": false
+     },
+     {
+      "class": "י' - 5",
+      "type": "מילוי מקום",
+      "text": "ירובוי לאה <- לאונרד אלמוג 23 מע' חשמל",
+      "mentions_me": false
+     },
+     {
+      "class": "י' - 5",
+      "type": "מילוי מקום",
+      "text": "ירובוי רינה <- גניים תימור",
+      "mentions_me": true
+     }
+    ]
+   }
+  ]
+ },
+ "2026-10-08": {
+  "date": "2026-10-08",
+  "weekday": "יום חמישי",
+  "holidays": [],
+  "recorded_at": "2026-10-08T13:06+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-08",
+    "hour": 3,
+    "start": "09:55",
+    "end": "10:40",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-08",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-08",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "פלדשטיין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-09": {
+  "date": "2026-10-09",
+  "weekday": "יום שישי",
+  "holidays": [],
+  "recorded_at": "2026-10-08T13:06+03:00",
+  "lessons": []
+ },
+ "2026-10-11": {
+  "date": "2026-10-11",
+  "weekday": "יום ראשון",
+  "holidays": [
+   "יום הזיכרון לרחבעם זאבי"
+  ],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-11",
+    "hour": 1,
+    "start": "08:10",
+    "end": "08:55",
+    "subject": "מעבדת תכנות בקרים ומיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-11",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא'- 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-11",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא'- 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-12": {
+  "date": "2026-10-12",
+  "weekday": "יום שני",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-12",
+    "hour": 5,
+    "start": "11:30",
+    "end": "12:15",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-12",
+    "hour": 6,
+    "start": "12:15",
+    "end": "13:00",
+    "subject": "תגבור חשמל",
+    "status": "regular",
+    "manual": true,
+    "classes": [],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-12",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "תגבור חשמל",
+    "status": "regular",
+    "manual": true,
+    "classes": [],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-13": {
+  "date": "2026-10-13",
+  "weekday": "יום שלישי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-13",
+    "hour": 1,
+    "start": "08:10",
+    "end": "08:55",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "cancelled",
+    "classes": [
+     "יא- 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "יא- 6",
+      "type": "אירוע",
+      "text": "טיול שנתי- שכבת יא",
+      "mentions_me": false
+     }
+    ]
+   },
+   {
+    "date": "2026-10-13",
+    "hour": 2,
+    "start": "08:55",
+    "end": "09:40",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "cancelled",
+    "classes": [
+     "יא- 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "יא- 6",
+      "type": "אירוע",
+      "text": "טיול שנתי- שכבת יא",
+      "mentions_me": false
+     }
+    ]
+   },
+   {
+    "date": "2026-10-13",
+    "hour": 5,
+    "start": "11:30",
+    "end": "12:15",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "cancelled",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "פלדשטיין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": [
+     {
+      "class": "יד'- 2",
+      "type": "אירוע",
+      "text": "סיור יג - יד לכנף1",
+      "mentions_me": false
+     }
+    ]
+   },
+   {
+    "date": "2026-10-13",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-14": {
+  "date": "2026-10-14",
+  "weekday": "יום רביעי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-14",
+    "hour": 4,
+    "start": "10:40",
+    "end": "11:25",
+    "subject": "מעבדת תכנות בקרים ומיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-14",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-15": {
+  "date": "2026-10-15",
+  "weekday": "יום חמישי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-15",
+    "hour": 3,
+    "start": "09:55",
+    "end": "10:40",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-15",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-15",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "פלדשטיין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-16": {
+  "date": "2026-10-16",
+  "weekday": "יום שישי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": []
+ },
+ "2026-10-18": {
+  "date": "2026-10-18",
+  "weekday": "יום ראשון",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-18",
+    "hour": 1,
+    "start": "08:10",
+    "end": "08:55",
+    "subject": "מעבדת תכנות בקרים ומיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-18",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא'- 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-18",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא'- 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-19": {
+  "date": "2026-10-19",
+  "weekday": "יום שני",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-19",
+    "hour": 5,
+    "start": "11:30",
+    "end": "12:15",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-19",
+    "hour": 6,
+    "start": "12:15",
+    "end": "13:00",
+    "subject": "תגבור חשמל",
+    "status": "regular",
+    "manual": true,
+    "classes": [],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-19",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "תגבור חשמל",
+    "status": "regular",
+    "manual": true,
+    "classes": [],
+    "rooms": [],
+    "co_teachers": [],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-20": {
+  "date": "2026-10-20",
+  "weekday": "יום שלישי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-20",
+    "hour": 1,
+    "start": "08:10",
+    "end": "08:55",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא- 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-20",
+    "hour": 2,
+    "start": "08:55",
+    "end": "09:40",
+    "subject": "מעבדת ישומים ומערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "יא- 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "בוטרימוב אלכסנדרה",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "פוגרבניאק גאורגי",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-20",
+    "hour": 5,
+    "start": "11:30",
+    "end": "12:15",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "פלדשטיין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-20",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י - 6"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-21": {
+  "date": "2026-10-21",
+  "weekday": "יום רביעי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-21",
+    "hour": 4,
+    "start": "10:40",
+    "end": "11:25",
+    "subject": "מעבדת תכנות בקרים ומיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-21",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "גניים תימור",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     },
+     {
+      "name": "קריין נועה",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-22": {
+  "date": "2026-10-22",
+  "weekday": "יום חמישי",
+  "holidays": [
+   "יום הזיכרון ליצחק רבין"
+  ],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": [
+   {
+    "date": "2026-10-22",
+    "hour": 3,
+    "start": "09:55",
+    "end": "10:40",
+    "subject": "מעבדה יישומים במערכות חשמל",
+    "status": "regular",
+    "classes": [
+     "י' - 5"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "אגרסט ניקולא",
+      "room": ""
+     },
+     {
+      "name": "ירובוי לאה",
+      "room": ""
+     },
+     {
+      "name": "לאונרד אלמוג",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-22",
+    "hour": 7,
+    "start": "13:40",
+    "end": "14:25",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   },
+   {
+    "date": "2026-10-22",
+    "hour": 8,
+    "start": "14:25",
+    "end": "15:10",
+    "subject": "מעבדה במיקרו בקרים",
+    "status": "regular",
+    "classes": [
+     "יד'- 2"
+    ],
+    "rooms": [],
+    "co_teachers": [
+     {
+      "name": "טמנוגרדסקי שון",
+      "room": ""
+     },
+     {
+      "name": "ספירין מישל",
+      "room": ""
+     },
+     {
+      "name": "פלדשטיין מישל",
+      "room": ""
+     },
+     {
+      "name": "שיראזי עידו",
+      "room": ""
+     }
+    ],
+    "other_lessons": [],
+    "changes": []
+   }
+  ]
+ },
+ "2026-10-23": {
+  "date": "2026-10-23",
+  "weekday": "יום שישי",
+  "holidays": [],
+  "recorded_at": "2026-10-09T20:59+03:00",
+  "lessons": []
+ }
+}

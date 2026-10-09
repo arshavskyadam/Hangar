@@ -1,0 +1,39 @@
+{
+ "site": "https://techni.shahaf.site/",
+ "people": [
+  {
+   "name_key": "ארשבסקי אדם",
+   "display_name": "ארשבסקי אדם",
+   "title": "המערכת של אדם",
+   "data_dir": "data",
+   "page": "site/index.html",
+   "artifact_url": "https://claude.ai/artifact/DvKVN9W78H1c8nGkSxHUSG",
+   "end_time_grades": [
+    "ט'"
+   ],
+   "homeroom": "ט' - 1",
+   "owner": true
+  },
+  {
+   "name_key": "ירובוי רינה",
+   "display_name": "ירובוי רינה",
+   "title": "המערכת של רינה",
+   "data_dir": "data/rina",
+   "page": "site/rina/index.html",
+   "artifact_url": "https://claude.ai/artifact/Rfp9BVeDpX439KVN6xo2oN",
+   "end_time_grades": [],
+   "extra_lessons": [
+    {
+     "weekday": 1,
+     "hours": [
+      6,
+      7
+     ],
+     "subject": "תגבור חשמל",
+     "note": "weekday: 0=ראשון, 1=שני ... 4=חמישי"
+    }
+   ],
+   "homeroom": "יא'- 2"
+  }
+ ]
+}
