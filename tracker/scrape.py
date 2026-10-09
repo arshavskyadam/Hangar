@@ -224,7 +224,42 @@ def fetch_agenda(class_id, tab, kind):
     return _agenda_cache[(class_id, tab)]
 
 
-def scrape(name_key, raw=None, end_grades=(), extra_lessons=()):
+def homeroom_info(raw, class_name):
+    """Per date: when the class finishes now and usually, which regular lessons dropped, and change markers."""
+    current = [(n, c) for entries in raw["slots"].values() for n, c in entries if n == class_name]
+    regular = [(n, c) for n, c in raw["regular"] if n == class_name]
+    now_end = last_periods(current, [class_name])
+    reg_end = last_periods(regular, [class_name])
+    by_slot = {(c["date"], c["hour"]): c for _, c in current}
+    days = {}
+    for d in sorted(set(now_end) | set(reg_end)):
+        days[d] = {"end": now_end.get(d, {}).get(class_name), "regular_end": reg_end.get(d, {}).get(class_name),
+                   "removed": [], "changes": []}
+    for _, cell in regular:
+        info = days.setdefault(cell["date"], {"end": None, "regular_end": None, "removed": [], "changes": []})
+        cur = by_slot.get((cell["date"], cell["hour"]))
+        kept = {(l["subject"], l["teacher"]) for l in (cur["lessons"] if cur else [])}
+        for l in cell["lessons"]:
+            if (l["subject"], l["teacher"]) not in kept:
+                info["removed"].append({"hour": cell["hour"], "subject": l["subject"], "teacher": l["teacher"]})
+    for _, cell in current:
+        for ch in cell["changes"]:
+            days.setdefault(cell["date"], {"end": None, "regular_end": None, "removed": [], "changes": []})["changes"].append(
+                {"hour": cell["hour"], "type": ch["type"], "text": ch["text"]})
+    # The last period with an actual lesson: an all-day event otherwise reads as a full school day.
+    for _, cell in current:
+        info = days.get(cell["date"])
+        if info is not None and cell["lessons"] and cell["hour"] is not None:
+            if not info.get("last_lesson") or cell["hour"] > info["last_lesson"]["hour"]:
+                info["last_lesson"] = {"hour": cell["hour"], "end": cell["end"]}
+    for info in days.values():
+        info.setdefault("last_lesson", None)
+        info["removed"].sort(key=lambda r: r["hour"])
+        info["changes"].sort(key=lambda r: r["hour"])
+    return {"class": class_name, "days": days}
+
+
+def scrape(name_key, raw=None, end_grades=(), extra_lessons=(), homeroom=None):
     """Return one teacher's lessons plus context, from a collect() result."""
     raw = raw or collect()
     now, classes, days, slots, regular, tab_items, site_update = (
@@ -239,7 +274,9 @@ def scrape(name_key, raw=None, end_grades=(), extra_lessons=()):
     for (day, hour), entries in slots.items():
         for class_name, cell in entries:
             mine = [l for l in cell["lessons"] if is_me(l["teacher"])]
-            noted = [ch for ch in cell["changes"] if is_me(ch["text"])]
+            # "teacher <- substitute": only the substitute side means the teacher gains a lesson here;
+            # being on the left means someone else covers the teacher's lesson.
+            noted = [ch for ch in cell["changes"] if is_me(ch["text"].split("<-")[-1])]
             if not mine and noted:
                 # A substitution or event naming the teacher in a slot without a regular lesson.
                 mine = [{"subject": noted[0]["text"], "room": "", "teacher": name_key}]
@@ -362,6 +399,7 @@ def scrape(name_key, raw=None, end_grades=(), extra_lessons=()):
         } for n in names]
 
     return {
+        "homeroom": homeroom_info(raw, homeroom) if homeroom else None,
         "scraped_at": now.isoformat(timespec="minutes"),
         "class_end": class_end,
         "site_update": site_update,

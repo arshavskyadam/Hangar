@@ -10,7 +10,9 @@
    "artifact_url": "https://claude.ai/artifact/DvKVN9W78H1c8nGkSxHUSG",
    "end_time_grades": [
     "ט'"
-   ]
+   ],
+   "homeroom": "ט' - 1",
+   "owner": true
   },
   {
    "name_key": "ירובוי רינה",
@@ -30,7 +32,8 @@
      "subject": "תגבור חשמל",
      "note": "weekday: 0=ראשון, 1=שני ... 4=חמישי"
     }
-   ]
+   ],
+   "homeroom": "יא'- 2"
   }
  ]
 }
