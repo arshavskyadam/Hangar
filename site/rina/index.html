@@ -71,7 +71,10 @@ header { display: grid; gap: 4px; }
 .a-new { font-size: .76rem; font-weight: 700; padding: 0 8px; border-radius: 999px; background: var(--warn); color: var(--surface); }
 .a-hint { font-size: .78rem; color: var(--muted); margin-inline-start: auto; }
 .alerts[open] .a-hint { display: none; }
-.a-list { display: grid; gap: 4px; margin-top: 8px; }
+.alerts, .a-item, .a-later { min-width: 0; }
+.a-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; margin-top: 8px; }
+.a-later > summary { font-size: .82rem; color: var(--muted); padding: 4px 2px; list-style: none; cursor: pointer; }
+.a-later > summary::-webkit-details-marker { display: none; }
 .a-item { background: var(--surface); border-radius: 6px; padding: 6px 10px; }
 .a-item > summary { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--ink); list-style: none; min-width: 0; }
 .a-tag { flex: none; font-size: .74rem; font-weight: 700; color: var(--warn); }
@@ -284,13 +287,21 @@ footer { font-size: .8rem; color: var(--muted); }
 
     var el = document.getElementById("alerts");
     if (!items.length) { el.innerHTML = '<p class="calm" style="margin:0">אין שינויים במערכת שלך בימים הקרובים.</p>'; return; }
-    var fresh = items.filter(function (i) { return i.isNew; }).length;
+    // The box covers the coming week; later changes sit in their own collapsed group.
+    var weekAhead = new Date(new Date(todayISO + "T12:00:00").getTime() + 7 * 864e5).toISOString().slice(0, 10);
+    var soon = items.filter(function (i) { return i.date <= weekAhead || i.date === "9999"; });
+    var later = items.filter(function (i) { return soon.indexOf(i) < 0; });
+    function row(i) {
+      return '<details class="a-item"><summary><span class="a-tag' + (i.bad ? " bad" : "") + '">' + esc(i.tag) + '</span><span class="a-head">' + i.head + '</span>' + (i.isNew ? '<span class="a-dot" title="חדש"></span>' : "") + '</summary><div class="a-body">' + i.body + '</div></details>';
+    }
+    var fresh = soon.filter(function (i) { return i.isNew; }).length;
     var open = store("alerts-open") === "1";
-    el.innerHTML = '<details class="alerts" id="alerts-box"' + (open ? " open" : "") + '><summary><span class="a-title">⚠️ ' + items.length + ' שינויים בימים הקרובים</span>' +
+    var title = soon.length ? "⚠️ " + soon.length + " שינויים בשבוע הקרוב" : "אין שינויים בשבוע הקרוב";
+    el.innerHTML = '<details class="alerts" id="alerts-box"' + (open ? " open" : "") + '><summary><span class="a-title">' + title + '</span>' +
       (fresh ? '<span class="a-new">' + fresh + ' חדשים</span>' : "") + '<span class="a-hint">הקש לפרטים</span></summary><div class="a-list">' +
-      items.map(function (i) {
-        return '<details class="a-item"><summary><span class="a-tag' + (i.bad ? " bad" : "") + '">' + esc(i.tag) + '</span><span class="a-head">' + i.head + '</span>' + (i.isNew ? '<span class="a-dot" title="חדש"></span>' : "") + '</summary><div class="a-body">' + i.body + '</div></details>';
-      }).join("") + '</div></details>';
+      soon.map(row).join("") +
+      (later.length ? '<details class="a-later"><summary>+ עוד ' + later.length + ' שינויים בהמשך (מבחנים ואירועים בתאריכים רחוקים)</summary><div class="a-list">' + later.map(row).join("") + '</div></details>' : "") +
+      '</div></details>';
     document.getElementById("alerts-box").addEventListener("toggle", function (e) { store("alerts-open", e.target.open ? "1" : "0"); });
   })();
 
